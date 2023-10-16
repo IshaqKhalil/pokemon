@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { RootState } from "./GlobalRedux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { saveSearchHistory } from "./GlobalRedux/Slices/history-slice";
+import Pokemon from "@/assets/pokemon-cover.jpg";
+import Image from "next/image";
 
 interface PokemonData {
   name: string;
@@ -43,7 +45,14 @@ export default function Home() {
     fetchPokemonData();
   }, []);
   return (
-    <div className="p-2 flex flex-col gap-3">
+    <div className="p-2 flex flex-col gap-3 max-w-[80%] m-auto">
+      <Image
+        width="700"
+        height="150"
+        className="w-[60%] m-auto"
+        alt="cover image"
+        src={Pokemon}
+      />
       <div className="flex items-center w-full gap-2">
         <input
           type="text"
@@ -52,7 +61,15 @@ export default function Home() {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
+          list="searchHistoryList"
         />
+        <datalist id="searchHistoryList">
+          {history.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </datalist>
         <button
           onClick={(e) => {
             const filteredData = filterPokemon(searchText);

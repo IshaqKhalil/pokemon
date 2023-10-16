@@ -1,6 +1,8 @@
 "use client";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Pokemon from "@/assets/pokemon-cover.jpg";
 
 function Page() {
   const params = useParams();
@@ -23,30 +25,48 @@ function Page() {
     fetchPokemonData();
   }, []);
   return (
-    <div className="flex items-center justify-center p-5">
-      <div className="p-2 flex flex-col gap-3  border border-black">
-        <img src={singlePokemonData?.sprites?.front_default} className="h-40 w-40" />
-        <p className="capitalize">Name: {singlePokemonData.name}</p>
-        <p className="capitalize">Height: {singlePokemonData.height} ft.</p>
-        <p className="capitalize">Weight: {singlePokemonData.weight} lbs.</p>
-        <p className="capitalize">
-          Base Experience: {singlePokemonData.base_experience}
-        </p>
-        <p className="capitalize">
-          Species: {singlePokemonData?.species?.name}
-        </p>
-        <p className="text-lg capitalize">Abilites: </p>
-        {singlePokemonData?.abilities?.map((item: any, index: number) => (
-          <p className="capitalize ml-3" key={index}>
-            {item.ability.name}{" "}
+    <div className="flex flex-col items-center justify-center p-5">
+      <Image
+        width="700"
+        height="150"
+        className="w-[40%] m-auto"
+        alt="cover image"
+        src={Pokemon}
+      />
+      <img
+        src={singlePokemonData?.sprites?.front_default}
+        className="h-40 w-40 border border-black my-4 rounded-lg"
+      />
+      <div className="flex items-start gap-5 m-auto border border-black p-4 rounded-lg">
+        <div>
+          <p className="capitalize">Name: {singlePokemonData.name}</p>
+          <p className="capitalize">Height: {singlePokemonData.height} ft.</p>
+          <p className="capitalize">Weight: {singlePokemonData.weight} lbs.</p>
+        </div>
+        <div>
+          <p className="capitalize">
+            Base Experience: {singlePokemonData.base_experience}
           </p>
-        ))}
-        <p className="text-lg capitalize">Types: </p>
-        {singlePokemonData?.types?.map((item: any, index: number) => (
-          <p className="capitalize ml-3" key={index}>
-            {item.type.name}
+          <p className="capitalize">
+            Species: {singlePokemonData?.species?.name}
           </p>
-        ))}
+        </div>
+        <div>
+          <p className="text-lg capitalize">Abilites: </p>
+          {singlePokemonData?.abilities?.map((item: any, index: number) => (
+            <p className="capitalize ml-3" key={index}>
+              {item.ability.name}{" "}
+            </p>
+          ))}
+        </div>
+        <div>
+          <p className="text-lg capitalize">Types: </p>
+          {singlePokemonData?.types?.map((item: any, index: number) => (
+            <p className="capitalize ml-3" key={index}>
+              {item.type.name}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
