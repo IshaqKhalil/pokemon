@@ -56,7 +56,7 @@ export default function Home() {
       <div className="flex items-center w-full gap-2">
         <input
           type="text"
-          className="p-2 border border-black focus:outline-none w-full"
+          className="p-2 border border-black focus:outline-none w-full rounded-lg"
           placeholder="Search Pokemon"
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -84,7 +84,7 @@ export default function Home() {
               }
             }
           }}
-          className="p-2 border border-black hover:bg-slate-300"
+          className="p-2 border border-black hover:bg-slate-300 rounded-lg"
         >
           Search
         </button>
@@ -98,7 +98,7 @@ export default function Home() {
             onClick={() => {
               router.push(`/${item.name}/${id}`);
             }}
-            className="p-2 border border-black cursor-pointer hover:bg-slate-300"
+            className="p-2 border border-black rounded-lg cursor-pointer hover:bg-slate-300"
           >
             <p className="capitalize">Pokemon Name: {item.name}</p>
           </div>
